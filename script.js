@@ -27,6 +27,11 @@ function vibrate(pattern = 50) {
   }
 }
 
+function fakeVibrate() {
+  card.classList.add('shake');
+  setTimeout(() => card.classList.remove('shake'), 100);
+}
+
 let gameData = [];
 
 fetch('data.json')
@@ -112,7 +117,7 @@ function init() {
   document.getElementById('skipBtn').addEventListener('click', () => 
   { addPoints(-1); 
     playSound('wrong');
-    vibrate(200);});
+    fakeVibrate;});
   document.getElementById('easyBtn').addEventListener('click', () => 
   { addPoints(1); 
     playSound('correct');});

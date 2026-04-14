@@ -394,3 +394,14 @@
   background: #ff6b6b;
   color: #fff;
 }
+
+.shake {
+  transform: translateX(2px);
+  animation: shake 0.1s linear 2;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-2px); }
+  100% { transform: translateX(2px); }
+}
