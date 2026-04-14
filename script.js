@@ -1,5 +1,25 @@
 // Dum Dum Gaem Script
 
+const sounds = {
+  click: new Audio('click.wav'),
+  correct: new Audio('correct.wav'),
+  wrong: new Audio('wrong.wav')
+};
+
+function playSound(name) {
+  const sound = sounds[name];
+  if (!sound) return;
+
+  sound.currentTime = 0;
+  sound.play().catch(() => {});
+}
+
+function vibrate(pattern = 50) {
+  if (navigator.vibrate) {
+    navigator.vibrate(pattern);
+  }
+}
+
 let gameData = [];
 
 fetch('data.json')
@@ -68,9 +88,18 @@ function init() {
 
   document.getElementById('startGame').addEventListener('click', startGame);
   document.getElementById('readyBtn').addEventListener('click', startTurn);
-  document.getElementById('skipBtn').addEventListener('click', () => addPoints(-1));
-  document.getElementById('easyBtn').addEventListener('click', () => addPoints(1));
-  document.getElementById('hardBtn').addEventListener('click', () => addPoints(3));
+  document.getElementById('skipBtn').addEventListener('click', () => 
+  { addPoints(-1); 
+    playSound('wrong');
+    vibrate(120);});
+  document.getElementById('easyBtn').addEventListener('click', () => 
+  { addPoints(1); 
+    playSound('correct');
+    vibrate(80);});
+  document.getElementById('hardBtn').addEventListener('click', () => 
+  { addPoints(3); 
+    playSound('correct');
+    vibrate(80);});
   document.getElementById('playAgainBtn').addEventListener('click', resetGame);
   pauseBtn.addEventListener('click', togglePause);
 }
