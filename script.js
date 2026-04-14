@@ -11,13 +11,14 @@ Object.values(sounds).forEach(s => {
 });
 
 function playSound(name) {
-  const base = sounds[name];
-  if (!base) return;
+  const sound = sounds[name];
+  if (!sound) return;
 
-  const sound = base.cloneNode(); // key trick
   sound.currentTime = 0;
 
-  sound.play().catch(() => {});
+  sound.play().catch(err => {
+    console.log('Audio blocked:', err);
+  });
 }
 
 function vibrate(pattern = 50) {
