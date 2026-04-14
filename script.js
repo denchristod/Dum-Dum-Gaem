@@ -1,26 +1,19 @@
 // Dum Dum Gaem Script
-
-const sounds = {
-  click: new Audio('click.wav'),
-  correct: new Audio('correct.wav'),
-  wrong: new Audio('wrong.wav')
-};
+console.log("SCRIPT LOADED");
 
 function playSound(name) {
-  const srcMap = {
+  const map = {
     click: 'click.wav',
     correct: 'correct.wav',
-    wrong: 'wrong.wav'
+    wrong: 'wrong.wav',
+    whoosh: 'whoosh.wav'
   };
 
-  const src = srcMap[name];
-  if (!src) return;
+  const audio = new Audio(map[name]);
+  audio.volume = 1;
 
-  const sound = new Audio(src);
-  sound.currentTime = 0;
-
-  sound.play().catch(err => {
-    console.log('Sound blocked:', err);
+  audio.play().catch(err => {
+    console.log("Audio blocked:", err);
   });
 }
 
@@ -85,6 +78,14 @@ function init() {
       btn.classList.add('active');
       state.timePerRound = parseInt(btn.dataset.time);
     });
+
+  document.addEventListener('click', () => {
+    const unlock = new Audio('click.wav');
+    unlock.play().then(() => {
+      unlock.pause();
+      unlock.currentTime = 0;
+    }).catch(() => {});
+    }, { once: true });
   });
 
   // setup rounds
@@ -96,22 +97,30 @@ function init() {
     });
   });
 
-  document.getElementById('startGame').addEventListener('click', startGame);
-  document.getElementById('readyBtn').addEventListener('click', startTurn);
+  document.getElementById('startGame').addEventListener('click', () => {
+  playSound('click');
+  startGame();
+  });
+  document.getElementById('readyBtn').addEventListener('click', () => {
+  playSound('click');
+  startTurn();
+  });
   document.getElementById('skipBtn').addEventListener('click', () => 
   { addPoints(-1); 
     playSound('wrong');
     vibrate(120);});
   document.getElementById('easyBtn').addEventListener('click', () => 
   { addPoints(1); 
-    playSound('correct');
-    vibrate(80);});
+    playSound('correct');});
   document.getElementById('hardBtn').addEventListener('click', () => 
   { addPoints(3); 
-    playSound('correct');
-    vibrate(80);});
-  document.getElementById('playAgainBtn').addEventListener('click', resetGame);
-  pauseBtn.addEventListener('click', togglePause);
+    playSound('correct');});
+  document.getElementById('playAgainBtn').addEventListener('click', () => {
+  playSound('click');
+  resetGame;});
+  pauseBtn.addEventListener('click', () => {
+  playSound('click');
+  togglePause();});
 }
 
 function startGame() {
@@ -203,6 +212,7 @@ function updateScoreDisplay() {
 }
 
 function endTurn() {
+  playSound('whoosh');
   clearInterval(state.timerInterval);
   state.isPlaying = false;
   state.paused = false;
