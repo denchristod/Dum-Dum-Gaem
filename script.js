@@ -7,11 +7,21 @@ const sounds = {
 };
 
 function playSound(name) {
-  const sound = sounds[name];
-  if (!sound) return;
+  const srcMap = {
+    click: 'click.wav',
+    correct: 'correct.wav',
+    wrong: 'wrong.wav'
+  };
 
+  const src = srcMap[name];
+  if (!src) return;
+
+  const sound = new Audio(src);
   sound.currentTime = 0;
-  sound.play().catch(() => {});
+
+  sound.play().catch(err => {
+    console.log('Sound blocked:', err);
+  });
 }
 
 function vibrate(pattern = 50) {
