@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Dum Dum Gaem</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="container">
+    <!-- Setup Screen -->
+    <div class="setup-screen" id="setupScreen">
+      <h1>Dum Dum Gaem</h1>
+
+      <div class="time-setting">
+        <label>Round time:</label>
+        <div class="time-buttons">
+          <button class="time-btn" data-time="30">30s</button>
+          <button class="time-btn active" data-time="60">60s</button>
+          <button class="time-btn" data-time="90">90s</button>
+        </div>
+      </div>
+
+      <div class="round-setting">
+        <label>Number of rounds:</label>
+        <div class="round-buttons">
+          <button class="round-btn active" data-rounds="3">3</button>
+          <button class="round-btn" data-rounds="5">5</button>
+          <button class="round-btn" data-rounds="7">7</button>
+        </div>
+      </div>
+
+      <button class="start-btn" id="startGame" disabled>Start Gaem</button>
+    </div>
+
+    <!-- Game Screen -->
+    <div class="game-screen" id="gameScreen">
+      <div class="header">
+        <div class="round-info">Round <span id="roundNum">1</span></div>
+        <div class="timer" id="timer">60</div>
+        <button class="pause-btn" id="pauseBtn"> <i class="fa-solid fa-pause"></i> </button>
+      </div>
+
+      <div class="scoreboard">
+        <div class="team-score team1" id="team1Box">
+          <div class="team-name" id="team1Display">Team Dum</div>
+          <div class="score" id="score1">0</div>
+        </div>
+        <div class="team-score team2" id="team2Box">
+          <div class="team-name" id="team2Display">Team Bum</div>
+          <div class="score" id="score2">0</div>
+        </div>
+      </div>
+
+      <div class="card" id="card">
+        <div class="word-container">
+          <div class="word-label">Easy (1 point)</div>
+          <div class="easy-word" id="easyWord">Quiz</div>
+        </div>
+        <div class="word-container">
+          <div class="word-label">Hard (3 points)</div>
+          <div class="hard-word" id="hardWord">Pop Quiz</div>
+        </div>
+      </div>
+
+      <div class="point-buttons">
+        <button class="point-btn skip" id="skipBtn">−1</button>
+        <button class="point-btn easy" id="easyBtn">+1</button>
+        <button class="point-btn hard" id="hardBtn">+3</button>
+      </div>
+    </div>
+
+    <!-- Turn Screen -->
+    <div class="turn-screen" id="turnScreen">
+      <h2>Get Ready!</h2>
+      <div class="team-highlight" id="turnTeamHighlight">Team Dum</div>
+      <p>Pass the phone to DumDum</p>
+      <button class="ready-btn" id="readyBtn">Start Turn</button>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div class="game-over" id="gameOverScreen">
+      <h2>🏆 Game Over!</h2>
+      <div class="winner-name" id="winnerName">Team Dum Wins!</div>
+      <div class="final-scores">
+        <div class="final-score">
+          <div class="name" id="final1Name">Team Dum</div>
+          <div class="points" id="final1Score">0</div>
+        </div>
+        <div class="final-score">
+          <div class="name" id="final2Name">Team Bum</div>
+          <div class="points" id="final2Score">0</div>
+        </div>
+      </div>
+      <button class="play-again-btn" id="playAgainBtn">Dum Dum Again</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
