@@ -1,20 +1,23 @@
 // Dum Dum Gaem Script
-console.log("SCRIPT LOADED");
+const sounds = {
+  click: new Audio('click.wav'),
+  correct: new Audio('correct.wav'),
+  wrong: new Audio('wrong.wav')
+};
+
+// preload them
+Object.values(sounds).forEach(s => {
+  s.load();
+});
 
 function playSound(name) {
-  const map = {
-    click: 'click.wav',
-    correct: 'correct.wav',
-    wrong: 'wrong.wav',
-    whoosh: 'whoosh.wav'
-  };
+  const base = sounds[name];
+  if (!base) return;
 
-  const audio = new Audio(map[name]);
-  audio.volume = 1;
+  const sound = base.cloneNode(); // key trick
+  sound.currentTime = 0;
 
-  audio.play().catch(err => {
-    console.log("Audio blocked:", err);
-  });
+  sound.play().catch(() => {});
 }
 
 function vibrate(pattern = 50) {
@@ -108,7 +111,7 @@ function init() {
   document.getElementById('skipBtn').addEventListener('click', () => 
   { addPoints(-1); 
     playSound('wrong');
-    vibrate(120);});
+    vibrate(200);});
   document.getElementById('easyBtn').addEventListener('click', () => 
   { addPoints(1); 
     playSound('correct');});
